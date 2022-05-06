@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ADD BOOK</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style2.css" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_photos.css" type="text/css">
+    <link rel="stylesheet" href="css/all.css" type="text/css">
+</head>
+
+<body>
+    
+    <div th:include="head-logged"></div>
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hero__item set-bg" data-setbg="img/livre.jpg">
+                        <div class="hero__text">
+                            <h3 id="accroche">Create your announcement </h3>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- user page -->
+    <div class="main-content">
+        <!-- Page content -->
+        <!-- <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div class="card card-profile shadow">
+                        <div class="row justify-content-center"> -->
+                            <!-- <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    <a href="#">
+
+                                    </a>
+                                </div>
+                            </div> -->
+                        </div>
+
+                <div class="col-xl-6" id="infolivre">
+                    <div class="card bg-secondary shadow" style="background-color: #fff;">
+                        
+                        <div class="card-body">
+                            <form th:action="@{/updatebook}" th:object="${book}" method="post">
+                                <h6 class="heading-small text-muted mb-4">Book information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-8" id="input-livre">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">Title</label>
+                                                <input th:type="text" id="input-title"
+                                                    class="form-control form-control-alternative" placeholder="Title"
+                                                    value="${book.title}" th:field="*{title}" name="title"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8" id="input-livre">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Category</label>        
+<!--                                                 <ul id="menu-deroulant"> -->
+<!--                                                     <li><a href="#" id="category" style="color: gray;">Choose a category</a> -->
+<!--                                                         <ul> -->
+<!--                                                             <li><a href="#">Manga / Comic</a></li> -->
+<!--                                                             <li><a href="#">Detective</a></li> -->
+<!--                                                             <li><a href="#">Science fiction</a></li> -->
+<!--                                                             <li><a href="#">Fantastic</a></li> -->
+<!--                                                             <li><a href="#">Adventure</a></li> -->
+<!--                                                             <li><a href="#">Horror</a></li> -->
+<!--                                                             <li><a href="#">Love</a></li> -->
+<!--                                                             <li><a href="#">Historic</a></li> -->
+<!--                                                             <li><a href="#">Childhood</a></li> -->
+<!--                                                             <li><a href="#">Poetry</a></li> -->
+<!--                                                             <li><a href="#">Biography</a></li> -->
+<!--                                                         </ul> -->
+<!--                                                     </li> -->
+<!--                                                    </ul> -->
+                                                   
+                                                   
+                                                   <div class="value ">
+								<div class="input-group ">
+									<div class="rs-select2 js-select-simple select--no-search" style="color: gray;">
+										<select class="form-select" name="category">
+											<option disabled="disabled" selected="selected" >Choose
+												option</option>
+											<option value="Manga / Comic">Manga / Comic</option>
+											<option value="Detective">Detective</option>
+											<option value="Science fiction">Science fiction</option>
+											<option value="Fantastic">Fantastic</option>
+											<option value="Adventure">Adventure</option>
+											<option value="Horror">Horror</option>
+											<option value="Love">Love</option>
+											<option value="Historic">Historic</option>
+											<option value="Childhood">Childhood</option>
+											<option value="Poetry">Poetry</option>
+											<option value="Biography">Biography</option>
+										</select>
+										<div class="select-dropdown"></div>
+									</div>
+								</div>
+							</div>
+                                                   
+                                                   
+                                                   
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8" id="input-livre">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-author">Author</label>
+                                                <input th:type="text" id="input-first-name"
+                                                    class="form-control form-control-alternative"
+                                                    placeholder="Author" value="" name="author">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8" id="input-livre">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-isbn">ISBN</label>
+                                                <input th:type="text" id="input-last-name"
+                                                    class="form-control form-control-alternative"
+                                                    placeholder="ISBN" value="" field="*{isbn}" name="isbn">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Price -->
+                                <h6 class="heading-small text-muted mb-4">Book price</h6>
+                                <div class="row">
+                                    
+                                    <div class="col-lg-6" id="input-livre">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-author">Price</label>
+                                            <input th:type="text" id="input-first-name"
+                                                class="form-control form-control-alternative"
+                                                placeholder="Price (€)" value="" field="*{price}" name="price">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6" id="input-livre">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-isbn">Guarantee</label>
+                                            <input th:type="text" id="input-last-name"
+                                                class="form-control form-control-alternative"
+                                                placeholder="Guarantee (€)" value="" field="*{replacementCost}" name="replacementCost">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                                                <div class="col-xl-4 offset-lg-5 my-4">
+<!--                                     <a class="password-btn" type="submit">Edit Profile</a> -->
+                                    <button id="login" class="password-btn" style="border-color: transparent" type="submit">Add Book</button>
+                                </div>
+                                
+                                </form>
+                            </div>
+                            
+                                <!-- Photos -->
+<!--                                 <h6 class="heading-small text-muted mb-4" id="phototitre">Photos</h6> -->
+<!--                                 <div class="pl-lg-12"> -->
+<!--                                     <div class="row"> -->
+<!--                                         <div class="col-md-6"> -->
+<!--                                             <div class="form-group focused"> -->
+<!--                                                 <label class="form-control-label" for="input-address"></label> -->
+<!--                                                 <div class="drop-zone" id="photo1"> -->
+<!--                                                     <span class="class drop-zone__prompt">Drop file here or click to upload</span> -->
+<!--                                                     <input type="file" name="myFile" class="drop-zone__input"> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                         </div>                                                                                                -->
+<!--                                                 <div class="col-md-6"> -->
+<!--                                                     <div class="form-group focused"> -->
+<!--                                                         <label class="form-control-label" for="input-address"></label> -->
+<!--                                                         <div class="drop-zone" id="photo1"> -->
+<!--                                                             <span class="class drop-zone__prompt">Drop file here or click to upload</span> -->
+<!--                                                             <input type="file" name="myFile" class="drop-zone__input"> -->
+<!--                                                         </div> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                     </div> -->
+                                <div class="col-xl-4 offset-lg-4" id="saveannouncement">
+                                    <a href="#!"  class="password-btn">Save announcement</a>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+   <div th:include="footer"></div>
+
+    <!-- Js Plugins -->
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/script_photos.js"></script>
+    <script src="js/all.js"></script>
+
+
+</body>
+
+</html>

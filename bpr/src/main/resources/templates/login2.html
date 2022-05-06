@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<!-- <link type="text/css" th:href="@{/style.css}" href="../static/css/style.css" rel="stylesheet"> -->
+</head>
+<body>
+	<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+		<div class="wrapper wrapper--w790">
+			<div class="card card-5">
+				<div class="card-heading">
+					<h2 class="title">Login</h2>
+				</div>
+				<div class="card-body">
+					<div class="form-container sign-in-container">
+						<form th:action="@{login}" method="post">
+							<div>
+								<div class="name">Username</div>
+								<input type="text" class="input--style-5" placeholder="username"
+									name="username" required />
+							</div>
+							<div>
+								<div class="name">Password</div>
+								<input type="password" class="input--style-5"
+									placeholder="password" name="password" required />
+							</div>
+							
+							<div>
+								<button class="btn btn--radius-2 btn--red" type="submit">Sign
+									In</button>
+							</div>
+							
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

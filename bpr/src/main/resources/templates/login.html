@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="css/style2.css" type="text/css">
+<link rel="stylesheet" href="css/all.css" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/login.css">
+	
+</head>
+<body>
+		<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Humberger Begin -->
+	<div class="humberger__menu__overlay"></div>
+	<div class="humberger__menu__wrapper">
+		<div class="humberger__menu__logo">
+			<a th:href="@{/}" ><img src="img/logo_fondblanc.png" alt="logo" width="60px" height="60px"></a>
+		</div>
+		<div class="humberger__menu__cart">
+			<!-- <ul>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            </ul>
+            <div class="header__cart__price">item: <span>$150.00</span></div> -->
+		</div>
+		<div class="humberger__menu__widget">
+			<div class="header__top__right__language">
+				<!-- <img src="img/language.png" alt="">
+                <div>English</div>
+                <span class="arrow_carrot-down"></span>
+                <ul>
+                    <li><a href="#">Spanis</a></li>
+                    <li><a href="#">English</a></li>
+                </ul> -->
+			</div>
+			<!-- <div class="header__top__right__auth">
+                <a href="#"><i class="fa fa-user"></i> Login</a>
+            </div> -->
+		</div>
+<!-- 		<nav class="humberger__menu__nav mobile-menu"> -->
+<!-- 			<ul> -->
+<!-- 				<li class="active"><a th:href="@{/}">Home</a></li> -->
+<!-- 				<li><a href="./contact.html">Contact</a></li> -->
+<!-- 			</ul> -->
+<!-- 		</nav> -->
+		<div id="mobile-menu-wrap"></div>
+		<!-- <div class="header__top__right__social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div> -->
+		<div class="humberger__menu__contact">
+			<!-- <ul>
+                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                <li>Free Shipping for all Order of $99</li>
+            </ul> -->
+		</div>
+	</div>
+	<!-- Humberger End -->
+
+	<!-- Header Section Begin -->
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="header__logo">
+						<a th:href="@{/}" ><img src="img/Image3.png" alt="logo" width="60px" height="60px"></a>
+					</div>
+				</div>
+<!-- 				<div class="col-lg-6"> -->
+<!-- 					<nav class="header__menu"> -->
+<!-- 						<ul> -->
+<!-- 							<li class="active"><a th:href="@{/}" >Home</a></li> -->
+<!-- 							<li><a href="./contact.html">Contact</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</nav> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-3">
+					<nav class="header__menu">
+						<ul>
+							<li><a href="" id="titre_login">Login / Sign Up</a></li>
+						</ul>
+					</nav>
+				</div> -->
+			</div>
+			<div class="humberger__open">
+				<i class="fa fa-bars"></i>
+			</div>
+		</div>
+	</header>
+	<!-- Header Section End -->
+
+	<div class="col-xl-4 order-xl-2 mb-5 mb-xl-0 offset-lg-4">
+		<div class="card py-4 h-100">
+			<div class="card-body text-center">
+				<div class="container" id="container">
+					<!-- <div class="form-container sign-in-container"> -->
+					<form th:action="@{login}" method="post">
+						<h1 style="color: black;">Sign in</h1>
+						<div class="social-container">
+							<a href="#" class="social"><i class="fa-brands fa-facebook-f" style="color: #EDBB0E;font-size:30px"></i></a>
+							<a href="#" class="social"><i class="fa-brands fa-google-plus-g" style="color: #EDBB0E;font-size:30px"></i></a>
+							<a href="#" class="social"><i class="fa-brands fa-linkedin-in" style="color: #EDBB0E;font-size:30px"></i></a>
+						</div>
+						<span>or use your account</span>
+						<input type="text" placeholder="Username" name="username" required/>
+						<input type="password" placeholder="Password" name="password" required/>
+						<a href="#">Forgot your password?</a>
+						<div>
+							<button id="login" type="submit">Sign In</button>
+							<button id="login" type = "button" value = "Retour"  onclick = "history.go(-1)">Return</button>
+						</div>
+					</form>
+						<a>You don't have an account ?</a>
+						<div>	
+							<a th:href="@{/signup}"  class="primary-btn" id="join" style="border-radius: 34px">Create Account</a>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:include="footer"></div>
+
+
+	<!-- Js Plugins -->
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.slicknav.js"></script>
+	<script src="js/mixitup.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/all.js"></script>
+</body>
+</html>

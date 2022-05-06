@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+		<div class="row">
+			<div class="col-lg-10 mt-5 mb-5">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">photoId</th>
+							<th scope="col">photo</th>
+							<th scope="col">photo_role</th>
+							<th scope="col">user_id</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="emp,state:${list}">
+							<td th:utext="${emp.photoId}"></td>
+<!-- 							<td th:src="@{${'/image/display/' + emp.photoId}}"></td> -->
+<!-- 							<td><img width="1000px" height="1000px" src="data:image/jpg;base64,@{${'/image/display/' + emp.photoId}"></td> -->
+							<td><img width="100px" height="100px" src="data:image/jpg;base64,${contentImage}"></td>
+							<td th:utext="${emp.photoRole}"></td>
+							<td th:utext="${emp.users.userId}"></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
