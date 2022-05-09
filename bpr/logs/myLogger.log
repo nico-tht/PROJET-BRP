@@ -13782,3 +13782,4 @@ java.lang.NullPointerException: null
 2022-mai-09 18:55:58 WARN   org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:208 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
 2022-mai-09 18:56:37 WARN   org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:208 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
 2022-mai-09 18:57:18 WARN   org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:208 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2022-mai-09 18:57:26 WARN   org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver:208 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
