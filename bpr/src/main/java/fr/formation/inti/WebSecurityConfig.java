@@ -2,14 +2,14 @@ package fr.formation.inti;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 import fr.formation.inti.service.UserService;
 
@@ -25,7 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	
+//	@Bean
+//	public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+//	    StrictHttpFirewall firewall = new StrictHttpFirewall();
+//	    firewall.setAllowUrlEncodedSlash(true);
+//	    firewall.setAllowSemicolon(true);
+//	    return firewall;
+//	}
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -76,6 +82,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    web
 	            .ignoring()
 	            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**","/**.css","/webfonts/**","/error");
+//	    super.configure(web);
+	    // @formatter:off
+//	    web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
 	}
 	
 }

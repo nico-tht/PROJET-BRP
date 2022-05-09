@@ -87,6 +87,12 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public void deleteUser(Users user) {
+		userDao.delete(user);
+		
+	}
+
 	// Role ADMIN, USER...
 
 //  Set < GrantedAuthority > grantedAuthorities = new HashSet < > ();

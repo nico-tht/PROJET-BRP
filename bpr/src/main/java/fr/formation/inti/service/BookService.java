@@ -15,6 +15,15 @@ public interface BookService {
 	
 	List<Book> findAllByUsers(Users user);
 	
+	List<Book> findAllByCategory(String category);
+	
 	Book findById(Integer id);
+	
+	void deleteById(Integer id);
+	
+	List<Book> findAll();
+	
+	List<Book> findByKeyword(String keyword);
+
 	
 }

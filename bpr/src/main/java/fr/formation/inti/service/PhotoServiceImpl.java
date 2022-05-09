@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import fr.formation.inti.dao.PhotoDao;
+import fr.formation.inti.entity.Book;
 import fr.formation.inti.entity.Photo;
 import fr.formation.inti.entity.Users;
 
@@ -46,6 +47,18 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Photo> findAllByUsersAndPhotoRole(Users user, String role) {
 		
 		return photoDao.findAllByUsersAndPhotoRole(user, role);
+	}
+
+	@Override
+	public Photo findByUsersAndPhotoRole(Users user, String role) {
+		// TODO Auto-generated method stub
+		return photoDao.findByUsersAndPhotoRole(user, role);
+	}
+
+	@Override
+	public List<Photo> findAllByPhotoRole(String role) {
+		// TODO Auto-generated method stub
+		return photoDao.findAllByPhotoRole(role);
 	}
 
 

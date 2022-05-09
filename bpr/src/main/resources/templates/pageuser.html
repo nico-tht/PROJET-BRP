@@ -56,60 +56,7 @@
         <!-- Page content -->
         <div class="container-fluid mt--7">
             <div class="row">
-<!--                 <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0"> -->
-<!--                     <div class="card card-profile shadow"> -->
-<!--                         <div class="row justify-content-center"> -->
-<!--                             <div class="col-lg-3 order-lg-2"> -->
-<!--                                 <div class="card-profile-image"> -->
-<!--                                     <a href="#"> -->
 
-<!--                                     </a> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
-
-<!--                         <div class="card-body pt-0 pt-md-4"> -->
-<!--                             <div class="row"> -->
-<!--                                 <div class="col"> -->
-<!--                                     <div class="card-profile-stats d-flex justify-content-center mt-md-5"> -->
-<!--                                         <div> -->
-<!--                                             <span class="heading">22</span> -->
-<!--                                             <span class="description">Books</span> -->
-<!--                                         </div> -->
-<!--                                         <div> -->
-<!--                                             <span class="heading">10</span> -->
-<!--                                             <span class="description">Loans</span> -->
-<!--                                         </div> -->
-<!--                                         <div> -->
-<!--                                             <span class="heading">89</span> -->
-<!--                                             <span class="description">Notes/Reviews</span> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                             <div class="text-center"> -->
-<!--                                 <h3 style="color: black;"> -->
-<!--                                     UserName<span class="font-weight-light">, Age</span> -->
-<!--                                 </h3> -->
-<!--                                 <div class="h5 font-weight-300"> -->
-<!--                                     <i class="ni location_pin mr-2"></i>City,Country -->
-<!--                                 </div> -->
-<!--                                 <div class="h5 mt-4"> -->
-<!--                                     <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer -->
-<!--                                 </div> -->
-<!--                                 <div> -->
-<!--                                     <i class="ni education_hat mr-2"></i>University of Computer Science -->
-<!--                                 </div> -->
-<!--                                 <hr class="my-4"> -->
-<!--                                 <p style="color: black;">Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick -->
-<!--                                     Murphy — writes, -->
-<!--                                     performs and records -->
-<!--                                     all of his own music.</p> -->
-<!--                                 <a href="#" style="color: #EDBB0E;">Show more</a> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
                 <div class="col-xl-8 offset-lg-2">
                     <div class="card bg-secondary shadow" style="background-color: #fff;">
                         <div class="card-header bg-white border-0">
@@ -262,6 +209,7 @@
                                 <div class="col-xl-4 offset-lg-5 my-4">
 <!--                                     <a class="password-btn" type="submit">Edit Profile</a> -->
                                     <button id="login" class="password-btn" style="border-color: transparent" type="submit">Edit profile</button>
+                                    <a id="login" class="password-btn" style="border-color: transparent" th:href="@{/accueil-logged}">Return</a>  
                                 </div>
                             </form>
                                 <hr class="my-4">
@@ -286,6 +234,30 @@
             </div>
         </div>
     </div>
+    
+        <div class="main-content">
+        <!-- Page content -->
+        <div class="container-fluid mt--7">
+            <div class="row">
+
+                <div class="col-xl-8 offset-lg-2">
+                    <div class="card bg-secondary shadow" style="background-color: #fff;">
+                        <div class="card-header bg-white border-0">
+                        	
+                                <h3 class="mb-0" style="color: black;">Delete your account</h3>
+<!--                                 <div class="pl-lg-4"> -->
+
+                                    <div class=" row col-xl-4 offset-lg-5 my-4">
+                                    <a id="login" class="password-btn " style="border-color: transparent" th:href="@{/deleteuser}" onclick="return confirm('are you sure ?')">Delete your account</a> 
+                                    </div>
+<!--                                </div> -->
+                        	
+                        </div>
+                    </div>
+               </div>
+           </div>   
+           </div>
+           </div>      
 
 	<div th:include="footer"></div>
 

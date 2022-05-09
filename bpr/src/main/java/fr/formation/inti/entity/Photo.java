@@ -24,6 +24,7 @@ import javax.persistence.Table;
 public class Photo implements java.io.Serializable {
 
 	private Integer photoId;
+	private Book book;
 	@Column(name = "users")
 	private Users users;
 	@Lob
@@ -36,6 +37,13 @@ public class Photo implements java.io.Serializable {
 	}
 
 	public Photo(Users users, byte[] photo, String photoRole) {
+		this.users = users;
+		this.photo = photo;
+		this.photoRole = photoRole;
+	}
+	
+	public Photo(Book book, Users users, byte[] photo, String photoRole) {
+		this.book = book;
 		this.users = users;
 		this.photo = photo;
 		this.photoRole = photoRole;
@@ -79,6 +87,16 @@ public class Photo implements java.io.Serializable {
 
 	public void setPhotoRole(String photoRole) {
 		this.photoRole = photoRole;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "book_id")
+	public Book getBook() {
+		return this.book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import fr.formation.inti.entity.Book;
 import fr.formation.inti.entity.Photo;
 import fr.formation.inti.entity.Users;
 
@@ -19,4 +20,8 @@ public interface PhotoService {
 	Optional<Photo> getImageById(Integer photoId);
 	
 	List<Photo> findAllByUsersAndPhotoRole(Users user, String role);
+	
+	List<Photo> findAllByPhotoRole(String role);
+	
+	Photo findByUsersAndPhotoRole(Users user, String role);
 }

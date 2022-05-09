@@ -24,6 +24,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void save(Book book) {
+
 		bookDao.save(book);		
 	}
 
@@ -41,6 +42,38 @@ public class BookServiceImpl implements BookService {
 	public Book findById(Integer id) {
 		// TODO Auto-generated method stub
 		return bookDao.findByBookId(id); 
+	}
+
+
+
+	@Override
+	public void deleteById(Integer id) {
+		bookDao.deleteById(id);
+		
+	}
+
+
+
+	@Override
+	public List<Book> findAll() {
+		
+		return bookDao.findAll();
+	}
+
+
+
+	@Override
+	public List<Book> findAllByCategory(String category) {
+		
+		return bookDao.findAllByCategory(category);
+	}
+
+
+
+	@Override
+	public List<Book> findByKeyword(String keyword) {
+
+		return bookDao.findByKeyword(keyword);
 	}
 
 }
