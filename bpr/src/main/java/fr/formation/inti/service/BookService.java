@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import fr.formation.inti.entity.Book;
+import fr.formation.inti.entity.Inventory;
 import fr.formation.inti.entity.Users;
 
 public interface BookService {
@@ -15,6 +16,17 @@ public interface BookService {
 	
 	List<Book> findAllByUsers(Users user);
 	
+	List<Book> findAllByCategory(String category);
+	
 	Book findById(Integer id);
+	
+	void deleteById(Integer id);
+	
+	List<Book> findAll();
+	
+	List<Book> findByKeyword(String keyword);
+	
+//	List<Book> findAllByInventoryAndUsers(Inventory inventory, Users user);
+
 	
 }

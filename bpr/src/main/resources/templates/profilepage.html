@@ -44,7 +44,9 @@
                                 <div class="profile mb-5">
 <!--                                 <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" -->
 <!--                                         alt="..." width="130" class="rounded mb-2 img-thumbnail"> -->
-                                <img th:src="@{${'/image/display/'+ emp.photoId}}"
+<!--                                 <img th:src="'data:image/**;base64,'+${contentImage}" -->
+<!--                                         alt="..." width="130" class="rounded mb-2 img-thumbnail"> -->
+                                <img th:src="@{|/showProf|}"
                                         alt="..." width="130" class="rounded mb-2 img-thumbnail">
                                         
                                         <h4 class="" th:utext="${username}">Username</h4>

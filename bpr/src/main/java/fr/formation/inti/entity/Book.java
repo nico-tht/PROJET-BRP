@@ -39,6 +39,7 @@ public class Book implements java.io.Serializable {
 	private Float price;
 	private Set<Inventory> inventories = new HashSet<Inventory>(0);
 	private Set<Forum> forums = new HashSet<Forum>(0);
+	private Set<Photo> photos = new HashSet<Photo>(0);
 
 	public Book() {
 	}
@@ -55,7 +56,7 @@ public class Book implements java.io.Serializable {
 	}
 
 	public Book(Users users, String title, String isbn, String author, String category, Integer rentalRate,
-			float replacementCost, float price, Set<Inventory> inventories, Set<Forum> forums) {
+			float replacementCost, float price, Set<Inventory> inventories, Set<Photo> photos, Set<Forum> forums) {
 		this.users = users;
 		this.title = title;
 		this.isbn = isbn;
@@ -65,9 +66,9 @@ public class Book implements java.io.Serializable {
 		this.replacementCost = replacementCost;
 		this.price = price;
 		this.inventories = inventories;
+		this.photos = photos;
 		this.forums = forums;
 	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
@@ -169,6 +170,15 @@ public class Book implements java.io.Serializable {
 
 	public void setForums(Set<Forum> forums) {
 		this.forums = forums;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+	public Set<Photo> getPhotos() {
+		return this.photos;
+	}
+
+	public void setPhotos(Set<Photo> photos) {
+		this.photos = photos;
 	}
 
 }

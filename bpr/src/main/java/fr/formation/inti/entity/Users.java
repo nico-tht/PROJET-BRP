@@ -43,6 +43,7 @@ public class Users implements java.io.Serializable {
 	private Set<Book> books = new HashSet<Book>(0);
 	private Set<Photo> photos = new HashSet<Photo>(0);
 	private Set<UsersRoles> usersRoleses = new HashSet<UsersRoles>(0);
+	private Set<Inventory> inventories = new HashSet<Inventory>(0);
 	private Set<Payment> payments = new HashSet<Payment>(0);
 
 	public Users() {
@@ -58,7 +59,7 @@ public class Users implements java.io.Serializable {
 
 	public Users(Address address, String username, String password, String firstName, String lastName, String email,
 			String phone, Set<Rental> rentals, Set<Book> books, Set<Photo> photos, Set<UsersRoles> usersRoleses,
-			Set<Payment> payments) {
+			Set<Inventory> inventories, Set<Payment> payments) {
 		this.address = address;
 		this.username = username;
 		this.password = password;
@@ -70,6 +71,7 @@ public class Users implements java.io.Serializable {
 		this.books = books;
 		this.photos = photos;
 		this.usersRoleses = usersRoleses;
+		this.inventories = inventories;
 		this.payments = payments;
 	}
 	
@@ -185,7 +187,7 @@ public class Users implements java.io.Serializable {
 		this.photos = photos;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users",cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users",cascade = CascadeType.ALL)
 	public Set<UsersRoles> getUsersRoleses() {
 		return this.usersRoleses;
 	}
@@ -201,6 +203,15 @@ public class Users implements java.io.Serializable {
 
 	public void setPayments(Set<Payment> payments) {
 		this.payments = payments;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
+	public Set<Inventory> getInventories() {
+		return this.inventories;
+	}
+
+	public void setInventories(Set<Inventory> inventories) {
+		this.inventories = inventories;
 	}
 
 	@Override

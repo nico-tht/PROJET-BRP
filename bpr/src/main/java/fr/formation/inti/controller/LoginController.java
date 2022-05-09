@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,10 +49,7 @@ public class LoginController {
 			return "login";
 		}
 	}
-	@RequestMapping("/accueil-logged")
-	public String welcome(Model model) {
-		return "accueil-logged";
-	}
+
 
 	@RequestMapping("/signup")
 	public String signup(Model model, @ModelAttribute Users user) {
@@ -73,27 +71,13 @@ public class LoginController {
 		return "pageuser";
 	}
 
-	@RequestMapping("/profile")
-	public String profile(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		Users user = userService.findByUsername(username);
-		String city = user.getAddress().getCity();
-		
-		model.addAttribute("username", user);
-		model.addAttribute("city", city);
-		return "profilepage";
-	}
+
 
 	@RequestMapping("/forum")
 	public String forum(Model model) {
 		return "forum";
 	}
 
-	@RequestMapping("/cart")
-	public String cart(Model model) {
-		return "pagecart";
-	}
 	
 	@RequestMapping("/addbook")
 	public String addbook(Model model) {
@@ -128,7 +112,13 @@ public class LoginController {
 		userService.save(user);
 		model.addAttribute("userAttr", user);
 
-		return "redirect:/login";
+		return "redirect:/recapuser";
+	}
+	
+	@RequestMapping("/recapuser")
+	public String recapuser(Model model) {
+		
+		return "recapsignup";
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -188,6 +178,31 @@ public class LoginController {
 //		
 //	}
 
+	@RequestMapping(value = "/deleteuser", method = RequestMethod.GET)
+	protected String deleteuser() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		Users user = userService.findByUsername(username);
+		
+		userService.deleteUser(user);
+		
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/payment")
+	public String payment(Model model) {
+		return "paymentpage";
+	}
+	@RequestMapping("/paypal")
+	public String paypal(Model model) {
+		return "paypalpaymentpage";
+	}
+	@RequestMapping("/paymentconfirmed")
+	public String paymentconfirmed(Model model) {
+		return "paymentConfirmed";
+	}
 	
 
 

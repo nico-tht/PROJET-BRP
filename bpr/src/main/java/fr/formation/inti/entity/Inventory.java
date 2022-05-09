@@ -23,6 +23,7 @@ public class Inventory implements java.io.Serializable {
 
 	private Integer inventoryId;
 	private Book book;
+	private Users users;
 	private Set<Rental> rentals = new HashSet<Rental>(0);
 
 	public Inventory() {
@@ -66,6 +67,16 @@ public class Inventory implements java.io.Serializable {
 
 	public void setRentals(Set<Rental> rentals) {
 		this.rentals = rentals;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	public Users getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 }
