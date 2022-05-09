@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
         // The pages does not require login
-        http.authorizeRequests().antMatchers("/","/add", "/login", "/logout","/bootstrap/**","/static/**","/resources/static/**","/signup").permitAll();
+        http.authorizeRequests().antMatchers("/","/css/**","/*.css","/add", "/login", "/logout","/bootstrap/**","/static/**","/resources/static/**","/signup").permitAll();
         
 
          // userInfo page requires login as USER or ADMIN.
@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 	    web
 	            .ignoring()
-	            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**","/**.css","/webfonts/**","/error");
+	            .antMatchers("/**.css","/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**","/**.css","/webfonts/**","/error");
 //	    super.configure(web);
 	    // @formatter:off
 //	    web.httpFirewall(allowUrlEncodedSlashHttpFirewall());

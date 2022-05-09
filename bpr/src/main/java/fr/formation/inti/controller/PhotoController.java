@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.util.ListUtils;
 
 import fr.formation.inti.entity.Book;
 import fr.formation.inti.entity.Photo;
@@ -58,7 +59,7 @@ public class PhotoController {
 
 	
 	@RequestMapping(value = "/addProfilePhoto", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<?> createProduct(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file) {
+	public String createProduct(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file) {
 		try {
 			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
 			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
@@ -66,10 +67,10 @@ public class PhotoController {
 			String fileName = file.getOriginalFilename();
 			String filePath = Paths.get(uploadDirectory, fileName).toString();
 			log.info("FileName: " + file.getOriginalFilename());
-			if (fileName == null || fileName.contains("..")) {
-				model.addAttribute("invalid", "Sorry! Filename contains invalid path sequence \" + fileName");
-				return new ResponseEntity<>("Sorry! Filename contains invalid path sequence " + fileName, HttpStatus.BAD_REQUEST);
-			}
+//			if (fileName == null || fileName.contains("..")) {
+//				model.addAttribute("invalid", "Sorry! Filename contains invalid path sequence \" + fileName");
+//				return new ResponseEntity<>("Sorry! Filename contains invalid path sequence " + fileName, HttpStatus.BAD_REQUEST);
+//			}
 			try {
 				File dir = new File(uploadDirectory);
 				if (!dir.exists()) {
@@ -96,16 +97,17 @@ public class PhotoController {
 			photo.setUsers(userupdate);
 			photoService.saveImage(photo);
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
-			return new ResponseEntity<>("Product Saved With File - " + fileName, HttpStatus.OK);
+			return "redirect:/accueil-logged";
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("Exception: " + e);
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return "redirect:/accueil-logged";
 		}
 	}
 	
-	@RequestMapping(value = "/addPrimaryPhoto", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<?> addprimaryphoto(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file) {
+	@RequestMapping(value = "/editProfilePhoto", method = RequestMethod.POST)
+	public String editProfilePicture(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file) {
 		try {
 			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
 			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
@@ -113,10 +115,10 @@ public class PhotoController {
 			String fileName = file.getOriginalFilename();
 			String filePath = Paths.get(uploadDirectory, fileName).toString();
 			log.info("FileName: " + file.getOriginalFilename());
-			if (fileName == null || fileName.contains("..")) {
-				model.addAttribute("invalid", "Sorry! Filename contains invalid path sequence \" + fileName");
-				return new ResponseEntity<>("Sorry! Filename contains invalid path sequence " + fileName, HttpStatus.BAD_REQUEST);
-			}
+//			if (fileName == null || fileName.contains("..")) {
+//				model.addAttribute("invalid", "Sorry! Filename contains invalid path sequence \" + fileName");
+//				return new ResponseEntity<>("Sorry! Filename contains invalid path sequence " + fileName, HttpStatus.BAD_REQUEST);
+//			}
 			try {
 				File dir = new File(uploadDirectory);
 				if (!dir.exists()) {
@@ -137,17 +139,18 @@ public class PhotoController {
 			Users userupdate = userService.findByUsername(username);
 			
 			byte[] imageData = file.getBytes();
-			Photo photo = new Photo();
+			Photo photo = photoService.findByUsersAndPhotoRole(userupdate, "PROFILE");
+			
 			photo.setPhoto(imageData);
-			photo.setPhotoRole("PRIMARY");
-			photo.setUsers(userupdate);
+
+
 			photoService.saveImage(photo);
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
-			return new ResponseEntity<>("Product Saved With File - " + fileName, HttpStatus.OK);
+			return "redirect:/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("Exception: " + e);
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return "redirect:/profile";
 		}
 	}
 	
@@ -240,23 +243,88 @@ public class PhotoController {
 
 	}
 	
+	@RequestMapping(path = { "/show" })
+	public void showPhoto(Model model, HttpServletResponse response, @RequestParam("id") Integer id) throws IOException {
+		
+		Book book = bookService.findById(id);
+		Photo photo = photoService.findByBookAndPhotoRole(book, "PRIMARY");
+		
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(photo.getPhoto());
+		response.getOutputStream().close();
+	}
+	
+	@RequestMapping(path = { "/showSec" })
+	public void showPhotoSec(Model model, HttpServletResponse response, @RequestParam("id") Integer id) throws IOException {
+		
+		Book book = bookService.findById(id);
+		Photo photo = photoService.findByBookAndPhotoRole(book, "SECONDARY");
+		
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(photo.getPhoto());
+		response.getOutputStream().close();
+	}
+	
+	@RequestMapping(path = { "/showProf" })
+	public void showPhotoProf(Model model, HttpServletResponse response) throws IOException {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		Users user = userService.findByUsername(username);
+;
+		Photo photo = photoService.findByUsersAndPhotoRole(user, "PROFILE");
+		
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(photo.getPhoto());
+		response.getOutputStream().close();
+	}
+	
 	@RequestMapping("/accueil-logged")
 	public String welcome(Model model) {
-		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String username = auth.getName();
-//		Users user = userService.findByUsername(username);
-//		
-//		String role = "PRIMARY";
-//		
-//		List<Photo> listP = photoService.findAllByPhotoRole(role);
-//		model.addAttribute("list", listP); 
 		
 		List<Book> list = bookService.findAll();
 		model.addAttribute("list", list);
 		
+		
+		
+//		List<String> encoded = new ArrayList<String>();
+//		List<Photo> list2 = photoService.findAllByPhotoRole("PRIMARY");
+//		for (Photo photo : list2) {
+//			encoded.add(Base64.getMimeEncoder().encodeToString(photo.getPhoto()));
+//		} 
+//		model.addAttribute("encoded", encoded );
+		
+
+		
 		return "accueil-logged";
 	}
+	
+//	@RequestMapping(value = "/image/list/{id}", method = RequestMethod.GET)
+//	public String showImagelist(@PathVariable("id") Integer id, HttpServletResponse response, Optional<Photo> imageGallery,Model model)
+//			throws ServletException, IOException {
+//		log.info("Id :: " + id);
+//		imageGallery = photoService.getImageById(id);
+//		ArrayList<Photo> content = new ArrayList<Photo>();
+//		imageGallery.ifPresent(content::add);
+//		model.addAttribute("imageGallery", imageGallery);
+//
+//		String base64Encoded = Base64.getMimeEncoder().encodeToString(imageGallery.get().getPhoto());
+//		model.addAttribute("contentImage", base64Encoded );
+//		
+//		ModelAndView modelAndView = new ModelAndView("view");
+//		modelAndView.addObject("contentImage",base64Encoded );
+//		
+//		
+//		List<String> encoded = new ArrayList<String>();
+//		List<Photo> list = photoService.findAllByPhotoRole("PRIMARY");
+//		for (Photo photo : list) {
+//			encoded.add(Base64.getMimeEncoder().encodeToString(imageGallery.get().getPhoto()));
+//		} 
+//		model.addAttribute("encoded", encoded );
+//		
+////		return modelAndView;
+//		return "listphoto";
+//	}
 	
 	
 	
@@ -321,38 +389,198 @@ public class PhotoController {
 		return "profilepage";
 	}
 	
-//	@RequestMapping("/primary")
-//	public String primary(Model model) {
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String username = auth.getName();
-//		Users user = userService.findByUsername(username);
-//		
-//		String role = "PROFILE";
-//		String city = user.getAddress().getCity();
-//		
-//		Photo photo = photoService.findByUsersAndPhotoRole(user, role);
-//		
-//
-//		ArrayList<Photo> content = new ArrayList<Photo>();
-//
-//		model.addAttribute("imageGallery", photo);		
-//
-//		String base64Encoded = Base64.getMimeEncoder().encodeToString(photo.getPhoto());
-//		model.addAttribute("contentImage", base64Encoded );
-//		
-//		ModelAndView modelAndView = new ModelAndView("view");
-//		modelAndView.addObject("contentImage",base64Encoded );
-//		
-//		model.addAttribute("username", user);
-//		model.addAttribute("city", city);
-//		
-//		return "profilepage";
-//	}
+	@RequestMapping("/addprincipalepicture/{bookId}")
+	public String primPict(Model model, @PathVariable(value = "bookId",required = false) Integer bookId) {
+
+		model.addAttribute("bookId", bookId);
+		return "addprimphoto";
+	}
 	
-//	@RequestMapping(value = "/listphoto", method = RequestMethod.GET)
-//	protected String loginPage(Model model) {
-//		return "listphoto";
-//	}
+	@RequestMapping("/addsecondarypicture/{bookId}")
+	public String secPict(Model model, @PathVariable(value = "bookId",required = false) Integer bookId) {
+
+		model.addAttribute("bookId", bookId);
+		return "addsecphoto";
+	}
+	
+	@RequestMapping(value = "/addPrimaryPhoto/{bookId}", method = RequestMethod.POST)
+	public String addprimaryphoto(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file, @PathVariable(value = "bookId",required = false) Integer bookId) {
+		try {
+			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
+			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
+			log.info("uploadDirectory:: " + uploadDirectory);
+			String fileName = file.getOriginalFilename();
+			String filePath = Paths.get(uploadDirectory, fileName).toString();
+			log.info("FileName: " + file.getOriginalFilename());
+			try {
+				File dir = new File(uploadDirectory);
+				if (!dir.exists()) {
+					log.info("Folder Created");
+					dir.mkdirs();
+				}
+				// Save the file locally
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+				stream.write(file.getBytes());
+				stream.close();
+			} catch (Exception e) {
+				log.info("in catch");
+				e.printStackTrace();
+			}
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String username = auth.getName();
+			Users userupdate = userService.findByUsername(username);
+			
+			byte[] imageData = file.getBytes();
+			Photo photo = new Photo();
+			photo.setPhoto(imageData);
+			photo.setPhotoRole("PRIMARY");
+			photo.setUsers(userupdate);
+			Book book = bookService.findById(bookId);
+			photo.setBook(book);
+			photoService.saveImage(photo);
+			
+			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
+			return "redirect:/addsecondarypicture/"+bookId;
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Exception: " + e);
+			return "redirect:/addsecondarypicture/"+bookId;
+		}
+	}
+	
+	@RequestMapping(value = "/addSecondaryPhoto/{bookId}", method = RequestMethod.POST)
+	public String addsecondaryphoto(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file, @PathVariable(value = "bookId",required = false) Integer bookId) {
+		try {
+			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
+			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
+			log.info("uploadDirectory:: " + uploadDirectory);
+			String fileName = file.getOriginalFilename();
+			String filePath = Paths.get(uploadDirectory, fileName).toString();
+			log.info("FileName: " + file.getOriginalFilename());
+
+			try {
+				File dir = new File(uploadDirectory);
+				if (!dir.exists()) {
+					log.info("Folder Created");
+					dir.mkdirs();
+				}
+				// Save the file locally
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+				stream.write(file.getBytes());
+				stream.close();
+			} catch (Exception e) {
+				log.info("in catch");
+				e.printStackTrace();
+			}
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String username = auth.getName();
+			Users userupdate = userService.findByUsername(username);
+			
+			byte[] imageData = file.getBytes();
+			Photo photo = new Photo();
+			photo.setPhoto(imageData);
+			photo.setPhotoRole("SECONDARY");
+			photo.setUsers(userupdate);
+			Book book = bookService.findById(bookId);
+			photo.setBook(book);
+			photoService.saveImage(photo);
+			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
+			return "redirect:/listbook";
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Exception: " + e);
+			return "redirect:/listbook";
+		}
+	}
+	
+	@RequestMapping(value = "/editPrimaryPhoto", method = RequestMethod.POST)
+	public String editprimaryphoto(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file) {
+		try {
+			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
+			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
+			log.info("uploadDirectory:: " + uploadDirectory);
+			String fileName = file.getOriginalFilename();
+			String filePath = Paths.get(uploadDirectory, fileName).toString();
+			log.info("FileName: " + file.getOriginalFilename());
+
+			try {
+				File dir = new File(uploadDirectory);
+				if (!dir.exists()) {
+					log.info("Folder Created");
+					dir.mkdirs();
+				}
+				// Save the file locally
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+				stream.write(file.getBytes());
+				stream.close();
+			} catch (Exception e) {
+				log.info("in catch");
+				e.printStackTrace();
+			}
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String username = auth.getName();
+			Users userupdate = userService.findByUsername(username);
+			
+			byte[] imageData = file.getBytes();
+			Photo photo = photoService.findByUsersAndPhotoRole(userupdate, "PRIMARY");
+			
+			photo.setPhoto(imageData);
+
+			photoService.saveImage(photo);
+			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
+			return "redirect:/accueil-logged";
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Exception: " + e);
+			return "redirect:/accueil-logged";
+		}
+	}
+	
+	@RequestMapping(value = "/editSecondaryPhoto", method = RequestMethod.POST)
+	public String editsecondaryphoto(Model model, HttpServletRequest request,final @RequestParam("image") MultipartFile file) {
+		try {
+			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
+			String uploadDirectory = request.getServletContext().getRealPath(uploadFolder);
+			log.info("uploadDirectory:: " + uploadDirectory);
+			String fileName = file.getOriginalFilename();
+			String filePath = Paths.get(uploadDirectory, fileName).toString();
+			log.info("FileName: " + file.getOriginalFilename());
+
+			try {
+				File dir = new File(uploadDirectory);
+				if (!dir.exists()) {
+					log.info("Folder Created");
+					dir.mkdirs();
+				}
+				// Save the file locally
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+				stream.write(file.getBytes());
+				stream.close();
+			} catch (Exception e) {
+				log.info("in catch");
+				e.printStackTrace();
+			}
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String username = auth.getName();
+			Users userupdate = userService.findByUsername(username);
+			
+			byte[] imageData = file.getBytes();
+			Photo photo = photoService.findByUsersAndPhotoRole(userupdate, "SECONDARY");
+			photo.setPhoto(imageData);
+
+			photoService.saveImage(photo);
+			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
+			return "redirect:/accueil-logged";
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("Exception: " + e);
+			return "redirect:/accueil-logged";
+		}
+	}
 	
 	
 	

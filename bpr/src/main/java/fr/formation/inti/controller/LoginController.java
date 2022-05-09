@@ -112,7 +112,13 @@ public class LoginController {
 		userService.save(user);
 		model.addAttribute("userAttr", user);
 
-		return "redirect:/login";
+		return "redirect:/recapuser";
+	}
+	
+	@RequestMapping("/recapuser")
+	public String recapuser(Model model) {
+		
+		return "recapsignup";
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -185,7 +191,18 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-
+	@RequestMapping("/payment")
+	public String payment(Model model) {
+		return "paymentpage";
+	}
+	@RequestMapping("/paypal")
+	public String paypal(Model model) {
+		return "paypalpaymentpage";
+	}
+	@RequestMapping("/paymentconfirmed")
+	public String paymentconfirmed(Model model) {
+		return "paymentConfirmed";
+	}
 	
 
 

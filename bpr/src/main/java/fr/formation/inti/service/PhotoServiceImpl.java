@@ -61,6 +61,12 @@ public class PhotoServiceImpl implements PhotoService {
 		return photoDao.findAllByPhotoRole(role);
 	}
 
+	@Override
+	public Photo findByBookAndPhotoRole(Book book, String role) {
+		// TODO Auto-generated method stub
+		return photoDao.findByBookAndPhotoRole(book, role);
+	}
+
 
 
 

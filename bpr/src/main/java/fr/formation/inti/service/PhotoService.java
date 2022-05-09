@@ -24,4 +24,6 @@ public interface PhotoService {
 	List<Photo> findAllByPhotoRole(String role);
 	
 	Photo findByUsersAndPhotoRole(Users user, String role);
+	
+	Photo findByBookAndPhotoRole(Book book, String role);
 }

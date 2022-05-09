@@ -45,8 +45,8 @@ public class BookController {
 
 		bookService.save(book);
 		model.addAttribute("bookAttr", book);
-
-		return "redirect:/listbook";
+		Integer bookId = book.getBookId();
+		return "redirect:/addprincipalepicture/"+bookId;
 	}
 	
 	@RequestMapping(value = "/listbook", method = RequestMethod.GET)

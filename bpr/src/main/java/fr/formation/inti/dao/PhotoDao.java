@@ -17,4 +17,6 @@ public interface PhotoDao extends JpaRepository<Photo, Integer>{
 	
 	Photo findByUsersAndPhotoRole(Users user, String role);
 	
+	Photo findByBookAndPhotoRole(Book book, String role);
+	
 }

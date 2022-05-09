@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import fr.formation.inti.dao.BookDao;
 import fr.formation.inti.entity.Book;
+import fr.formation.inti.entity.Inventory;
 import fr.formation.inti.entity.Users;
 
 
@@ -75,6 +76,14 @@ public class BookServiceImpl implements BookService {
 
 		return bookDao.findByKeyword(keyword);
 	}
+
+
+
+//	@Override
+//	public List<Book> findAllByInventoryAndUsers(Inventory inventory, Users user) {
+//		// TODO Auto-generated method stub
+//		return bookDao.findAllByInventoryAndUsers(inventory, user);
+//	}
 
 }
 
