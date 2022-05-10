@@ -178,7 +178,7 @@ public class Users implements java.io.Serializable {
 		this.books = books;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users",cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users",cascade = CascadeType.ALL)
 	public Set<Photo> getPhotos() {
 		return this.photos;
 	}

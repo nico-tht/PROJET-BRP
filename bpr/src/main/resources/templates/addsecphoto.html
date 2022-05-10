@@ -2,163 +2,136 @@
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ADD BOOK</title>
+<meta charset="UTF-8">
+<meta name="description" content="Ogani Template">
+<meta name="keywords" content="Ogani, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>ADD BOOK</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/jquery-ui.min..css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/style2.css}" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style_photos.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/all.css}" type="text/css">
+<!-- Css Styles -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/elegant-icons.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/nice-select.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min..css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/slicknav.min.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/style2.css}" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/style_photos.css}"
+	type="text/css">
+<link rel="stylesheet" th:href="@{/css/all.css}" type="text/css">
 </head>
 
 <body>
-    
-    <div th:include="head-logged"></div>
 
-    <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="hero__item set-bg" data-setbg="img/livre.jpg">
-                        <div class="hero__text">
-                            <h3 id="accroche">Create your announcement </h3>
-                        </div>
-                        <!-- </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+	<div th:include="head-logged"></div>
 
-    <!-- user page -->
-    <div class="main-content">
-        <!-- Page content -->
-        <!-- <div class="container-fluid mt--7">
-            <div class="row">
-                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-                    <div class="card card-profile shadow">
-                        <div class="row justify-content-center"> -->
-                            <!-- <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image">
-                                    <a href="#">
+	<!-- Hero Section Begin -->
+	<section class="hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="hero__item set-bg" data-setbg="img/livre.jpg">
+						<div class="hero__text">
+							<h3 id="accroche">Create your announcement</h3>
+						</div>
+						<!-- </div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section End -->
 
-                                    </a>
-                                </div>
-                            </div> -->
-                        </div>
+	<!-- user page -->
+	<div class="main-content"></div>
 
-                <div class="col-xl-6" id="infolivre">
-                    <div class="card bg-secondary shadow" style="background-color: #fff;">
-                        
-                        <div class="card-body">
-                            
-                            </div>
-                            
-                                <!-- Photos -->
-                                <h6 class="heading-small text-muted mb-4" id="phototitre">Secondary Photo</h6>
-                                <form th:action="@{/addSecondaryPhoto/}  + ${bookId}" th:object="${image}" enctype="multipart/form-data"  method="post">                               
-                                <div class="pl-lg-12">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group focused">
-                                                <label class="form-control-label" for="input-address"></label>
-                                                <div class="drop-zone" id="photo1">
-                                                    <span class="class drop-zone__prompt">Drop file here or click to upload</span>
-                                                    <input type="file" name="image" class="drop-zone__input">
-                                                </div>
-                                            </div>
-                                        </div>                                                                                               
-<!--                                                 <div class="col-md-6"> -->
-<!--                                                     <div class="form-group focused"> -->
-<!--                                                         <label class="form-control-label" for="input-address"></label> -->
-<!--                                                         <div class="drop-zone" id="photo1"> -->
-<!--                                                             <span class="class drop-zone__prompt">Drop file here or click to upload</span> -->
-<!--                                                             <input type="file" name="myFile" class="drop-zone__input"> -->
-<!--                                                         </div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
-<!--                                             </div> -->
-<!--                                     </div> -->
-<!--                                 <div class="col-xl-4 offset-lg-4" id="saveannouncement"> -->
-<!--                                     <a href="#!"  class="password-btn">Save announcement</a> -->
-<!--                                 </div> -->
-                            
-                        </div>
-                    </div>
-                    <div class="col-xl-4 offset-lg-5">
-                           <button id="login" class="password-btn" style="border-color: transparent" type="submit">Add Photo</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="col-xl-6" id="infolivre">
+		<div class="card bg-secondary shadow" style="background-color: #fff;">
 
+			<div class="card-body"></div>
 
+			<!-- Photos -->
+			<h6 class="heading-small text-muted mb-4" id="phototitre">Secondary
+				Photo</h6>
+			<form th:action="@{/addSecondaryPhoto/}  + ${bookId}"
+				th:object="${image}" enctype="multipart/form-data" method="post">
+				<div class="pl-lg-12">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group focused">
+								<label class="form-control-label" for="input-address"></label>
+								<div class="drop-zone" id="photo1">
+									<span class="class drop-zone__prompt">Drop file here or
+										click to upload</span> <input type="file" name="image"
+										class="drop-zone__input">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 offset-lg-5">
+					<button id="login" class="password-btn"
+						style="border-color: transparent" type="submit">Add Photo</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
+	<div th:include="footer"></div>
 
+	<!-- Js Plugins -->
+	<script>
+		// Get the modal
+		var modal = document.getElementById("myModal");
 
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
 
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
 
+		// When the user clicks the button, open the modal 
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
 
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
 
-   <div th:include="footer"></div>
-
-    <!-- Js Plugins -->
-    <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
-    <script th:src="@{/js/jquery-ui.min.js}"></script>
-    <script th:src="@{/js/jquery.slicknav.js}"></script>
-    <script th:src="@{/js/mixitup.min.js}"></script>
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/script_photos.js}"></script>
-    <script th:src="@{/js/all.js}"></script>
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+	<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/js/jquery-ui.min.js}"></script>
+	<script th:src="@{/js/jquery.slicknav.js}"></script>
+	<script th:src="@{/js/mixitup.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/script_photos.js}"></script>
+	<script th:src="@{/js/all.js}"></script>
 
 
 </body>

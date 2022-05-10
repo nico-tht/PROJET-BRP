@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.formation.inti.dao.UserDao;
@@ -91,6 +92,19 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(Users user) {
 		userDao.delete(user);
 		
+	}
+	
+	//@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Override
+	public void changePassword(Users user, String newPassword) {
+		
+		String p = new String(new BCryptPasswordEncoder().encode(newPassword));
+		
+		user.setPassword(p);
+		
+		userDao.save(user);
 	}
 
 	// Role ADMIN, USER...
