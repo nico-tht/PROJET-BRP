@@ -3,6 +3,8 @@ package fr.formation.inti.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -154,7 +156,7 @@ public class Book implements java.io.Serializable {
 		this.price = price;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book",cascade = CascadeType.ALL)
 	public Set<Inventory> getInventories() {
 		return this.inventories;
 	}
@@ -172,7 +174,7 @@ public class Book implements java.io.Serializable {
 		this.forums = forums;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book",cascade = CascadeType.ALL)
 	public Set<Photo> getPhotos() {
 		return this.photos;
 	}

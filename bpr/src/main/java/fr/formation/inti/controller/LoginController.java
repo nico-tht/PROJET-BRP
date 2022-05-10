@@ -63,10 +63,12 @@ public class LoginController {
 	}
 
 	@RequestMapping("/edit")
-	public String edit(Model model) {
+	public String edit(Model model,@RequestParam(value= "message",required = false) String message) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
 		Users user = userService.findByUsername(username);
+        model.addAttribute("message", message);
+       
 		model.addAttribute("user", user);
 		return "pageuser";
 	}
@@ -84,30 +86,11 @@ public class LoginController {
 		return "pageaddbook";
 	}
 
-//	@RequestMapping(value="/add", method = RequestMethod.POST)
-//	protected String addUser(@ModelAttribute("user") Users user, Model model, BindingResult result) {
-//
-//		userService.save(user);
-//		model.addAttribute("userAttr", user);
-//		
-//		return "redirect:/login";
-//	}
-
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	protected String addUser(@ModelAttribute("user") Users user, Model model, BindingResult result) {
-//String pwd = user.getPassword();
-//String password = encoder.encode(pwd);
-//user.setPassword(password);
-//		user.getPassword()
+
 		String p = new String(new BCryptPasswordEncoder().encode(user.getPassword()));
-//		user.setPassword(p);
-//		Users useradd = new Users();
-//		useradd.setEmail(user.getEmail());
-//		useradd.setFirstName(user.getFirstName());
-//		useradd.setLastName(user.getLastName());
-//		useradd.setUsername(user.getUsername());
-//		useradd.setPassword(user.getPassword());
-//		useradd.setAddress(user.getAddress());
+
 		user.setPassword(p);
 		userService.save(user);
 		model.addAttribute("userAttr", user);
@@ -148,35 +131,6 @@ public class LoginController {
 		model.addAttribute("city", city);
 		return "redirect:/profile";
 	}
-	
-//	@RequestMapping(value = "/update", method = RequestMethod.POST)
-//	protected String doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//		String username = request.getParameter("username");
-//		String firstName = request.getParameter("firstName");
-//		String lastName = request.getParameter("lastName");
-//		String email = request.getParameter("email");
-//		String address = request.getParameter("address");
-//		String city = request.getParameter("city");
-//		String country = request.getParameter("country");
-//		String zipCode = request.getParameter("zipCode");
-//
-//
-//		Users user = userService.findByUsername(username);
-//		Address addressUpdate = new Address(address,city,zipCode,country);
-//		
-//		user.setUsername(username);
-//		user.setFirstName(firstName);
-//		user.setLastName(lastName);
-//		user.setEmail(email);
-//		user.setAddress(addressUpdate);
-//		user.setLastName(lastName);
-//
-//		userService.save(user);
-//		
-//		return "redirect:/pageuser";
-//		
-//	}
 
 	@RequestMapping(value = "/deleteuser", method = RequestMethod.GET)
 	protected String deleteuser() {
