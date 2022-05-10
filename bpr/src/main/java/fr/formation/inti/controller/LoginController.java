@@ -204,6 +204,14 @@ public class LoginController {
 		return "paymentConfirmed";
 	}
 	
-
+	@RequestMapping("/booknotavailable")
+	public String twobook(Model model) {
+		return "addtwotimebook";
+	}
+	
+	@RequestMapping("/itsyourbook")
+	public String yourbook(Model model) {
+		return "addyourbook";
+	}
 
 }
