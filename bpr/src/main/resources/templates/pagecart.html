@@ -168,12 +168,10 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-<!--                         	<li id="totalAmount"></li> -->
-<!--                         	<li th:utext="${price}"></li> -->
-<!--                         	<li th:utext="'guarantee : '+${guarantee}+ ' €'"></li> -->
-<!--                         	<li th:utext="'total : '+${total}+ ' €'"></li> -->
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Price <span th:utext="${total} + ' €'"></span></li>
+                            <li>Guarantee <span th:utext="${totalg} + ' €'"></span></li>
+                            <li></li>
+                            <li>Total <span th:utext="${totalall} + ' €'"></span></li>
                         </ul>
                         <a th:href="@{/payment}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
@@ -195,26 +193,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/all.js"></script>
-<!--     <script> -->
-//     $(document).ready(function() {
-//     	updateTotal();
-//     });
-    
-//     function updateTotal() {
-//     	total = 0.0;
-    	
-//     	var price = list.book.price;
-    	
-//     $(".productSubtotal").each(function(list, list) {
-//     	total = total + parseFloat(list.book.price);
-//     });
-    
-//     $("#totalAmount").text("$" + total);
-    
-//     }
-    
-<!--     </script> -->
-    
+  
 
 
 </body>

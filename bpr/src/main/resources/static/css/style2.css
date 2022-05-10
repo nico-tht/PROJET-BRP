@@ -1933,7 +1933,8 @@ text-align: center;
 }
 
 .product__details__pic__item img {
-	min-width: 100%;
+/* 	min-width: 100%; */
+width: 300px
 }
 
 .product__details__pic__slider img {

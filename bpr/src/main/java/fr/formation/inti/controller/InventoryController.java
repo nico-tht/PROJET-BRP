@@ -51,12 +51,12 @@ public class InventoryController {
 		List<Inventory> list = inventoryService.findAll();
 		
 		if (book.getUsers().equals(user)) {
-			return "redirect:/accueil-logged";
+			return "redirect:/itsyourbook";
 		} 
 		
 		for (Inventory temp : list) {
 			if (book.getBookId()==temp.getBook().getBookId()) {
-				return "redirect:/accueil-logged";	
+				return "redirect:/booknotavailable";	
 			}				
 		}
 			
@@ -79,19 +79,32 @@ public class InventoryController {
 		Users user = userService.findByUsername(username);		
 		
 		List<Inventory> list = inventoryService.findAllByUsers(user);
-		
+//		
 //		Float price = null;
 //		Float totalguarantee = null;
-//		
-//		for (Inventory inventory : list) {
-//			price += inventory.getBook().getPrice();
-//			totalguarantee += inventory.getBook().getReplacementCost();
-//		}
-//		Float total = price + totalguarantee;
-//		
-//		model.addAttribute("total", total);
-//		model.addAttribute("price", price);
-//		model.addAttribute("guarantee", totalguarantee);
+		Float total = 0f;
+		Float totalg = 0f;
+		for (Inventory inventory : list) {
+			System.out.println(inventory.getBook().getPrice());
+			Float price = inventory.getBook().getPrice();
+			System.out.println(price);
+			total = total + price;
+			System.out.println("total : " + total);
+			System.out.println(inventory.getBook().getReplacementCost());
+			Float guarantee = inventory.getBook().getReplacementCost();
+			System.out.println(guarantee);
+			totalg = totalg + guarantee;
+			System.out.println("total : " + totalg);
+
+		}
+		
+		
+		Float totalall = 0f;
+		totalall = total + totalg;
+		
+		model.addAttribute("total", String.format("%.2f", total));
+		model.addAttribute("totalg", String.format("%.2f", totalg));
+		model.addAttribute("totalall", String.format("%.2f", totalall));
 
 		model.addAttribute("list", list);
 		

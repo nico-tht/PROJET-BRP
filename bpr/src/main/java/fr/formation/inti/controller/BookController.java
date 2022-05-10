@@ -108,6 +108,10 @@ public class BookController {
 		Book book = bookService.findById(bookId);
 		model.addAttribute("book", book);
 		
+		List<Book> list = bookService.findAllByCategory(book.getCategory());
+		model.addAttribute("list", list);
+		
+		
 		return "pagearticle";
 	}
 	
