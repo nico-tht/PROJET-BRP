@@ -61,16 +61,6 @@ public class BookController {
 		return "listbook";
 	}
 	
-
-	
-//	@RequestMapping("/accueil-logged/page/{i}")
-//	public String page(Model model, @PathVariable(value = "i",required = false) Integer i) {
-//		
-//		List<Book> list = bookService.findAll();
-//		model.addAttribute("list", list);
-//		
-//		return "accueil-logged";
-//	}
 	
 	@RequestMapping("/accueil-logged/{category}")
 	public String filter(Model model, @PathVariable(value = "category",required = false) String category) {
